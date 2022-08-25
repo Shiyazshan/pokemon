@@ -4,6 +4,28 @@
     font-weight: normal;
     src: url(../fonts/PressStart2P-Regular.woff) format("woff");
 }
+@font-face {
+    font-family: "outfit_medium";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/Outfit-Medium.woff) format("woff");
+}
+
+@font-face {
+    font-family: "outfit_regular";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/Outfit-Regular.woff) format("woff");
+}
+@font-face {
+    font-family: "outfit_light";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/Outfit-Light.woff) format("woff");
+}
+ul {
+    list-style: none;
+}
 .linear-wipe {
     text-align: center;
 
@@ -34,7 +56,7 @@ body {
 
 .container {
     /* position: absolute; */
-    height: 300px;
+    height: 200px;
     /* width: 600px; */
     /* top: 60px;
     left: calc(50% - 300px); */
@@ -74,7 +96,9 @@ body {
     font-weight: 300;
     position: absolute;
     left: 20px;
+    display: block;
     top: 15px;
+    text-align: center;
 }
 
 .bar {
@@ -133,4 +157,122 @@ svg {
 .card:hover .stroke {
     stroke-dashoffset: 100;
     transition: 0.6s ease-out;
+}
+
+/* helo */
+
+.containers {
+    width: 350px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+#card {
+    position: relative;
+    width: 100%;
+    padding: 30px 20px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+#card img {
+    display: block;
+    width: 180px;
+    max-height: 200px;
+    position: relative;
+    margin: 20px auto;
+}
+.hp {
+    width: 80px;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 30px;
+    margin-left: auto;
+    font-weight: 400;
+}
+.poke-name {
+    text-align: center;
+    font-weight: 600;
+}
+.types {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0 40px 0;
+}
+.hp span,
+.types span {
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+}
+.types span {
+    padding: 5px 20px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+.stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+.stats p {
+    color: #404060;
+}
+#btn {
+    display: block;
+    padding: 15px 60px;
+    font-size: 18px;
+    background-color: #101010;
+    color: #ffffff;
+    position: relative;
+    margin: 30px auto;
+    border: none;
+    border-radius: 5px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #48538d;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+.pagination a {
+    padding: 4px 14px;
+    border-radius: 5px;
+    color: #161619;
+    background-color: #fff;
+    font-size: 13px;
+    margin: 0 5px 5px;
+    display: inline-block;
+}
+.pagination li.break a {
+    display: inline-block;
+}
+.previous .pagination__link {
+    background: #959595;
+    border-radius: 3px;
+    color: #48538d;
+}
+.next .pagination__link {
+    background: #959595;
+    border-radius: 3px;
+    color: #48538d;
+}
+.pagination__link {
+    font-weight: bold;
+}
+.pagination__link--active a {
+    color: #fff !important;
+    background: #48538d;
+}
+.pagination__link--disabled a {
+    cursor: not-allowed;
+}
+.active_link_classname {
+    color: #fff;
+    background: #48538d;
 }

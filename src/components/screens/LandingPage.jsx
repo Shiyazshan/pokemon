@@ -48,6 +48,7 @@ const StartButton = styled(Link)`
     align-items: center;
     justify-content: flex-end;
     cursor:pointer;
+    text-decoration: none;
 `;
 const Arrow = styled.div`
     width:20px;
