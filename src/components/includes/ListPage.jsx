@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import axios from 'axios'
 import SingleCardModal from '../modal/SingleCardModal';
-import { useSearchParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { logDOM } from '@testing-library/react';
 
 
 function ListPage() {
@@ -12,12 +10,9 @@ function ListPage() {
     const [poke, setPoke] = useState()
     const [url, seturl] = useState("")
     const [isShow, setShow] = useState(false)
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [currentPage, setCurrentPage] = useState(0);
-    const [pagination, setPagination] = useState();
     const [offset, setOffset] = useState(0);
     const [pageCount, setPageCount] = useState(0)
-    const [perPage] = useState(12);
+    const [perPage] = useState(24);
     const [searchedItems, setSearchedItems] = useState()
 
     const handlePageClick = (e) => {
@@ -25,20 +20,6 @@ function ListPage() {
         setOffset(selectedPage + 1)
     };
 
-    // useEffect(() => {
-    //     axios
-    //         .get("https://pokeapi.co/api/v2/pokemon")
-    //         .then((res) => {
-    //             setDatas(res.data.results)
-    //             setPagination(res.data.count)
-    //             console.log(res, "total count");
-    //         }
-    //         )
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-
-    // }, [])
     const renderdatas = async () => {
         if (searchedItems) {
 
@@ -82,33 +63,8 @@ function ListPage() {
             setDatas(postData)
             setPageCount(Math.ceil(datas.length / perPage))
         }
-        // const datas = res.data.results;
-        // const slice = datas.slice(offset, offset + perPage)
-        // datas.filter((item) => {
-        //     console.log("in filter");
-        //     if (searchedItems === "") {
-        //         return item
-        //     } else if (item.name) {
-        //         return item
-        //     }
-        //     console.log(item, "item")
-        // }).map((item) => (
-        //     <Cards onClick={() => { seturl(item.url); setShow(true) }}>
-        //         <div class="container">
-        //             <div class="card">
-        //                 <h3 class="title">{item.name}</h3>
-        //                 <div class="bar">
-        //                     <div class="emptybar"></div>
-        //                     <div class="filledbar"></div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </Cards>
-        // ))
 
     }
-    console.log(datas, "opopopo");
-    console.log(searchedItems, "search");
     useEffect(() => {
         renderdatas()
     }, [offset, searchedItems])
@@ -128,7 +84,6 @@ function ListPage() {
     const handleCardModal = () => {
         setShow(!isShow)
     }
-    console.log(poke, "poke data");
     return (
         <Container>
             <Wrapper>
@@ -136,31 +91,14 @@ function ListPage() {
                     <LeftSide>
                         <Text>Pokemon Generations</Text>
                     </LeftSide>
-                    <Rightside>
-                        <input
-                            type="search"
-                            placeholder="Please search here..."
-                            onChange={(e) => setSearchedItems(e.target.value)}
-                            value={searchedItems}
-                        />
-                        <Title>Filter</Title>
-                    </Rightside>
                 </TopBar>
                 <ListContainer>
                     {
-                        // renderdatas()
                         datas
                     }
                     <SingleCardModal data={poke} isShow={isShow} handleCardModal={handleCardModal} />
                 </ListContainer>
-                {/* {pagination && pagination.total_pages > 1 && datas.length > 0 && ( */}
                 <PaginationContainer>
-                    {/* <PaginationText>
-						Showing {pagination.current_page} -{" "}
-						{pagination.last_item} of {pagination.total_pages}{" "}
-						entries
-					</PaginationText> */}
-
                     <ReactPaginate
                         previousLabel={"<"}
                         nextLabel={">"}
@@ -175,7 +113,6 @@ function ListPage() {
                         activeClassName={"pagination__link--active"}
                     />
                 </PaginationContainer>
-                {/* )} */}
             </Wrapper>
         </Container>
     )
