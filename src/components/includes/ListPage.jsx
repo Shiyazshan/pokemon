@@ -40,9 +40,50 @@ function ListPage() {
 
     // }, [])
     const renderdatas = async () => {
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`)
-        const datas = res.data.results;
-        const slice = datas.slice(offset, offset + perPage)
+        if (searchedItems) {
+
+            const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?${searchedItems}`)
+            const datas = res.data.results;
+            const slice = datas.slice(offset, offset + perPage)
+            const postData = slice.map(item =>
+                <Cards onClick={() => { seturl(item.url); setShow(true) }}>
+
+                    <div class="container">
+                        <div class="card">
+                            <h3 class="title">{item.name}</h3>
+                            <div class="bar">
+                                <div class="emptybar"></div>
+                                <div class="filledbar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </Cards>
+            )
+            setDatas(postData)
+            setPageCount(Math.ceil(datas.length / perPage))
+        } else {
+            const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`)
+            const datas = res.data.results;
+            const slice = datas.slice(offset, offset + perPage)
+            const postData = slice.map(item =>
+                <Cards onClick={() => { seturl(item.url); setShow(true) }}>
+
+                    <div class="container">
+                        <div class="card">
+                            <h3 class="title">{item.name}</h3>
+                            <div class="bar">
+                                <div class="emptybar"></div>
+                                <div class="filledbar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </Cards>
+            )
+            setDatas(postData)
+            setPageCount(Math.ceil(datas.length / perPage))
+        }
+        // const datas = res.data.results;
+        // const slice = datas.slice(offset, offset + perPage)
         // datas.filter((item) => {
         //     console.log("in filter");
         //     if (searchedItems === "") {
@@ -64,24 +105,10 @@ function ListPage() {
         //         </div>
         //     </Cards>
         // ))
-        const postData = slice.map(item =>
-            <Cards onClick={() => { seturl(item.url); setShow(true) }}>
 
-                <div class="container">
-                    <div class="card">
-                        <h3 class="title">{item.name}</h3>
-                        <div class="bar">
-                            <div class="emptybar"></div>
-                            <div class="filledbar"></div>
-                        </div>
-                    </div>
-                </div>
-            </Cards>
-        )
-        setDatas(postData)
-        setPageCount(Math.ceil(datas.length / perPage))
     }
     console.log(datas, "opopopo");
+    console.log(searchedItems, "search");
     useEffect(() => {
         renderdatas()
     }, [offset, searchedItems])
